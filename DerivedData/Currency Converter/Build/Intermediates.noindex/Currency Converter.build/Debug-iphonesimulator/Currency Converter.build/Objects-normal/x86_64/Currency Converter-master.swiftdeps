@@ -1,6 +1,6 @@
 version: "Apple Swift version 4.1.2 (swiftlang-902.0.54 clang-902.0.39.2)"
 options: "661ab4ce36a113f7ceead134a9058019"
-build_time: [1534711911, 370665000]
+build_time: [1534720630, 307755000]
 inputs:
-  "/Users/edwincloud/Documents/Make School/projects/Currency Converter/Currency Converter/ViewController.swift": [1534711889, 0]
+  "/Users/edwincloud/Documents/Make School/projects/Currency Converter/Currency Converter/ViewController.swift": [1534720627, 0]
   "/Users/edwincloud/Documents/Make School/projects/Currency Converter/Currency Converter/AppDelegate.swift": [1534631903, 0]

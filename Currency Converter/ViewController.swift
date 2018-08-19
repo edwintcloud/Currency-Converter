@@ -63,35 +63,45 @@ class ViewController: UIViewController {
             return
         }
         
+        // If C button, clear reset inputs to "0"
+        if button.titleLabel?.text == "C" {
+            usdInput.text = "0"
+            euroInput.text = "0"
+            return
+        }
+        
         // USD group active actions
         if usdActive {
-            if button.titleLabel?.text == "C" {
-                usdInput.text = "0"
-                euroInput.text = "0"
-            } else {
-                if usdInput.text == "0" {
-                    usdInput.text = ""
-                    usdInput.text = (usdInput.text)! + (button.titleLabel?.text)!
-                } else {
-                    usdInput.text = (usdInput.text)! + (button.titleLabel?.text)!
-                }
-                euroInput.text = convert(value: usdInput.text)
+            
+            // If decimal button, make sure only one decimal point exists otherwise return
+            if button.titleLabel?.text == "." {
+                if usdInput.text!.contains(".") { return }
             }
+            
+            if usdInput.text == "0" {
+                usdInput.text = ""
+                usdInput.text = (usdInput.text)! + (button.titleLabel?.text)!
+            } else {
+                usdInput.text = (usdInput.text)! + (button.titleLabel?.text)!
+            }
+            euroInput.text = convert(value: usdInput.text)
         }
         
         // Euro group active actions
         else {
-            if button.titleLabel?.text == "C" {
-                euroInput.text = "0"
-            } else {
-                if euroInput.text == "0" {
-                    euroInput.text = ""
-                    euroInput.text = (euroInput.text)! + (button.titleLabel?.text)!
-                } else {
-                    euroInput.text = (euroInput.text)! + (button.titleLabel?.text)!
-                }
-                usdInput.text = convert(value: euroInput.text)
+            
+            // If decimal button, make sure only one decimal point exists otherwise return
+            if button.titleLabel?.text == "." {
+                if euroInput.text!.contains(".") { return }
             }
+            
+            if euroInput.text == "0" {
+                euroInput.text = ""
+                euroInput.text = (euroInput.text)! + (button.titleLabel?.text)!
+            } else {
+                euroInput.text = (euroInput.text)! + (button.titleLabel?.text)!
+            }
+            usdInput.text = convert(value: euroInput.text)
         }
         
     }
