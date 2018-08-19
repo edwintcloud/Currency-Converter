@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         if usdActive {
             if button.titleLabel?.text == "C" {
                 usdInput.text = "0"
+                euroInput.text = "0"
             } else {
                 if usdInput.text == "0" {
                     usdInput.text = ""
