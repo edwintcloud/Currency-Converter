@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // Global Variables
     var usdValue: Double = 0.00
     var euroValue: Double = 0.00
     var usdActive:Bool = true
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var currencyStack: UIStackView!
     @IBOutlet weak var group1: UIButton!
     @IBOutlet weak var group2: UIButton!
+    
+    // USD group background button - onTap event handler
     @IBAction func group1(_ sender: UIButton) {
         usdInput.textColor = UIColor.red
         euroInput.textColor = UIColor.black
@@ -41,6 +44,7 @@ class ViewController: UIViewController {
         euroInput.text = "0"
     }
     
+    // Euro group background button - onTap event handler
     @IBAction func group2(_ sender: UIButton) {
         euroInput.textColor = UIColor.red
         usdInput.textColor = UIColor.black
@@ -51,10 +55,15 @@ class ViewController: UIViewController {
         euroInput.text = "0"
     }
     
+    // onTap event handler for NumberPad buttons
     @IBAction func button1(_ sender: AnyObject) {
+        
+        // Set button var = sender as UIButton or exit safely
         guard let button = sender as? UIButton else {
             return
         }
+        
+        // USD group active actions
         if usdActive {
             if button.titleLabel?.text == "C" {
                 usdInput.text = "0"
@@ -68,7 +77,10 @@ class ViewController: UIViewController {
                 }
                 euroInput.text = convert(value: usdInput.text)
             }
-        } else {
+        }
+        
+        // Euro group active actions
+        else {
             if button.titleLabel?.text == "C" {
                 euroInput.text = "0"
             } else {
@@ -81,47 +93,33 @@ class ViewController: UIViewController {
                 usdInput.text = convert(value: euroInput.text)
             }
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Disable user interaction needed to detect group button click - makes currencyStack a passthrough view
         currencyStack.isUserInteractionEnabled = false
+        
+        // set the initial theme
         setTheme()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func setTheme() {
-        button1.layer.borderWidth = 1
-        button2.layer.borderWidth = 1
-        button3.layer.borderWidth = 1
-        button4.layer.borderWidth = 1
-        button5.layer.borderWidth = 1
-        button6.layer.borderWidth = 1
-        button7.layer.borderWidth = 1
-        button8.layer.borderWidth = 1
-        button9.layer.borderWidth = 1
-        buttonDecimal.layer.borderWidth = 1
-        button0.layer.borderWidth = 1
-        buttonC.layer.borderWidth = 1
         
-        button1.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button2.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button3.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button4.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button5.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button6.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button7.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button8.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button9.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        buttonDecimal.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        button0.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
-        buttonC.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
+        // Set border on buttons
+        let buttons = [button1,button2,button3,button4,button5,button6,button6,button7,button8,button9,buttonDecimal,button0,buttonC]
+        for button in buttons {
+            button?.layer.borderWidth = 1
+            button?.layer.borderColor = UIColor(named: "greyBorderCC")?.cgColor
+        }
         
+        // Set initial text colors and groups background color
         usdInput.textColor = UIColor.red
         euroInput.textColor = UIColor.black
         group1.layer.backgroundColor = UIColor(named: "highlightColorCC")?.cgColor
@@ -130,12 +128,17 @@ class ViewController: UIViewController {
     }
     
     func convert(value:String?) -> String{
+        
+        // Convert string to Double and if successful store in dValue else return "0"
         if let dValue = Double(value!) {
+            
+            // Check global bool usdActive to determine which group is selected to return correct result
             if usdActive {
                 return String(format: "%.2f", dValue * 0.87)
             } else {
                 return String(format: "%.2f", dValue / 0.87)
             }
+            
         } else {
             return "0"
         }
