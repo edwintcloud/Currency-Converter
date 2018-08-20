@@ -142,6 +142,9 @@ class ViewController: UIViewController {
         // Convert string to Double and if successful store in dValue else return "0"
         if let dValue = Double(value!) {
             
+            // Check if result is 0 and return 0 instead of 0.00
+            if dValue == 0.00 { return "0" }
+            
             // Check global bool usdActive to determine which group is selected to return correct result
             if usdActive {
                 return String(format: "%.2f", dValue * 0.87)
